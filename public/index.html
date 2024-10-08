@@ -20,6 +20,7 @@
 
         <input type="text" id="eventLocation" placeholder="Location" required />
         <input type="url" id="eventLink" placeholder="Event Link (Optional)" />
+        <textarea id="eventNotes" placeholder="Notes" rows="4"></textarea> <!-- Added Notes section -->
         <button type="submit">Add Event</button>
     </form>
 
@@ -63,6 +64,7 @@
                             <p class="event-dates">${startDateTime}${endDateTime}</p>
                             <p class="event-location">${event.location}</p>
                             ${event.link ? `<p><a href="${event.link}" target="_blank">Event Link</a></p>` : ''}
+                            ${event.notes ? `<p class="event-notes">Notes: ${event.notes}</p>` : ''} <!-- Display notes -->
                             <button class="delete-button" data-id="${event.id}">Delete Event</button>
                         </div>
                         `;
@@ -100,7 +102,8 @@
                 date: document.getElementById('eventDateTime').value,
                 endDate: document.getElementById('eventEndDateTime').value, // Optional end date
                 location: document.getElementById('eventLocation').value,
-                link: document.getElementById('eventLink').value  // Optional
+                link: document.getElementById('eventLink').value,  // Optional
+                notes: document.getElementById('eventNotes').value  // Get notes from input
             };
 
             fetch('/api/events', {

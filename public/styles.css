@@ -19,29 +19,16 @@ form {
   margin: 0 auto;
 }
 
-input, button {
+input, button, textarea {
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
 
-.to-label {
-  align-self: center; /* Center align the "to" label */
-  margin: 0 10px; /* Add margin to the left and right */
-  font-size: 16px; /* Match the font size with input fields */
-  color: #666; /* Set a light gray color for the label */
-}
-
-.date-time-inputs {
-  display: flex;
-  gap: 10px; /* Space between start and end time inputs */
-  align-items: center; /* Center align items vertically */
-}
-
-.date-input {
-  flex: 1; /* Make both date inputs the same size as other inputs */
-  min-width: 0; /* Allow the input to shrink */
+textarea {
+  resize: vertical;
+  min-height: 100px;
 }
 
 button {
@@ -69,7 +56,7 @@ button:hover {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 300px;
-  text-align: center; /* Center text inside the event card */
+  text-align: center;
   transition: transform 0.2s;
 }
 
@@ -105,9 +92,8 @@ button:hover {
 
 .event-dates {
   display: flex;
-  justify-content: center; /* Center align the date text */
+  justify-content: center;
   margin: 5px 0;
-  width: 100%; /* Make sure it uses the full width */
 }
 
 .event-location {
@@ -126,4 +112,15 @@ button:hover {
 
 .delete-button:hover {
   background-color: #d32f2f; /* Darker red on hover */
+}
+
+/* Styling for the "Notes" section */
+.event-notes {
+  font-style: normal;
+  margin: 10px 0;
+  color: #444;
+  text-align: left;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 5px;
 }
