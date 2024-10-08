@@ -26,9 +26,17 @@ input, button {
   border: 1px solid #ccc;
 }
 
+.to-label {
+  align-self: center; /* Center align the "to" label */
+  margin: 0 10px; /* Add margin to the left and right */
+  font-size: 16px; /* Match the font size with input fields */
+  color: #666; /* Set a light gray color for the label */
+}
+
 .date-time-inputs {
   display: flex;
   gap: 10px; /* Space between start and end time inputs */
+  align-items: center; /* Center align items vertically */
 }
 
 .date-input {

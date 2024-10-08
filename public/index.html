@@ -14,6 +14,7 @@
         
         <div class="date-time-inputs">
             <input type="datetime-local" id="eventDateTime" required placeholder="Start Time" class="date-input" />
+            <span class="to-label">to</span>
             <input type="datetime-local" id="eventEndDateTime" placeholder="End Time (Optional)" class="date-input" />
         </div>
 
@@ -47,7 +48,13 @@
                         let endDateTime = '';
                         if (event.endDate) {
                             const endDate = new Date(event.endDate);
-                            endDateTime = ` to ${endDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`;
+                            endDateTime = ` to ${endDate.toLocaleString('en-US', {
+                                month: 'short',
+                                day: 'numeric',
+                                hour: 'numeric',
+                                minute: 'numeric',
+                                hour12: true
+                            }).replace(',', '')}`; // Format without a comma
                         }
 
                         const eventCard = `
