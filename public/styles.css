@@ -94,3 +94,16 @@ button:hover {
   font-style: italic;
   color: #888;
 }
+
+.delete-button {
+  background-color: #f44336; /* Red background */
+  color: white; /* White text */
+  border: none; /* No border */
+  padding: 5px 10px; /* Padding */
+  cursor: pointer; /* Pointer cursor on hover */
+  margin-top: 10px; /* Space above the button */
+}
+
+.delete-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
