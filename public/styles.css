@@ -85,9 +85,15 @@ button:hover {
   background-color: #0056b3;
 }
 
-.event-date {
-  font-weight: bold;
-  color: #007BFF;
+.event-dates {
+  display: flex;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+.event-date,
+.event-end-date {
+  margin-right: 10px; /* Space between start and end date */
 }
 
 .event-location {
