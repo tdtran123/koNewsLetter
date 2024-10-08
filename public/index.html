@@ -20,7 +20,6 @@
     <div id="events-container"></div>
 
     <script>
-        // Fetch all events from the server
         const fetchEvents = () => {
             fetch('/api/events')
                 .then(response => response.json())
@@ -41,20 +40,14 @@
                 });
         };
 
-        // Add new event
         document.getElementById('event-form').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            const eventName = document.getElementById('eventName').value;
-            const eventDateTime = document.getElementById('eventDateTime').value;
-            const eventLocation = document.getElementById('eventLocation').value;
-            const eventLink = document.getElementById('eventLink').value;
-
             const newEvent = {
-                name: eventName,
-                date: eventDateTime,
-                location: eventLocation,
-                link: eventLink
+                name: document.getElementById('eventName').value,
+                date: document.getElementById('eventDateTime').value,
+                location: document.getElementById('eventLocation').value,
+                link: document.getElementById('eventLink').value
             };
 
             fetch('/api/events', {
@@ -67,8 +60,7 @@
                 fetchEvents(); // Refresh events list
             });
 
-            // Clear form inputs
-            this.reset();
+            this.reset(); // Clear form inputs
         });
 
         // Initial load of events
