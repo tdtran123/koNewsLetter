@@ -33,28 +33,30 @@
                             <p class="event-date">${new Date(event.date).toLocaleString()}</p>
                             <p class="event-location">${event.location}</p>
                             ${event.link ? `<p><a href="${event.link}" target="_blank">Event Link</a></p>` : ''}
-                            <button class="delete-button" data-id="${event.id}">Delete</button> <!-- Delete Button -->
+                            <button class="delete-button" data-id="${event.id}">Delete Event</button>
                         </div>
                         `;
                         eventsContainer.innerHTML += eventCard;
                     });
-                    
-                    // Add event listeners for delete buttons
+
+                    // Attach event listeners for delete buttons
                     document.querySelectorAll('.delete-button').forEach(button => {
-                        button.addEventListener('click', function() {
-                            deleteEvent(this.getAttribute('data-id'));
+                        button.addEventListener('click', function () {
+                            const eventId = this.getAttribute('data-id');
+                            deleteEvent(eventId);
                         });
                     });
                 });
         };
 
-        const deleteEvent = (eventId) => {
-            fetch(`/api/events/${eventId}`, {
+        const deleteEvent = (id) => {
+            fetch(`/api/events/${id}`, {
                 method: 'DELETE'
             })
             .then(() => {
-                fetchEvents(); // Refresh events list after deletion
-            });
+                fetchEvents(); // Refresh events list
+            })
+            .catch(error => console.error('Error deleting event:', error));
         };
 
         document.getElementById('event-form').addEventListener('submit', function (e) {
