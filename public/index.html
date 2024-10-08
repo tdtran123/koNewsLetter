@@ -13,7 +13,7 @@
         <input type="text" id="eventName" placeholder="Event Name" required />
         <input type="datetime-local" id="eventDateTime" required />
         <input type="text" id="eventLocation" placeholder="Location" required />
-        <input type="url" id="eventLink" placeholder="Event Link (Optional)" />
+        <input type="url" id="eventLink" placeholder="Event Link (Optional)" required />
         <button type="submit">Add Event</button>
     </form>
 
@@ -40,40 +40,28 @@
                 });
         };
 
-        document.getElementById('event-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent form submission
+        document.getElementById('event-form').addEventListener('submit', function (e) {
+            e.preventDefault();
 
-            // Get values from the form
-            const eventName = document.getElementById('event-name').value;
-            const eventDate = document.getElementById('event-date').value;
-            const eventLocation = document.getElementById('event-location').value;
-            const eventLink = document.getElementById('event-link').value; // Optional
+            const newEvent = {
+                name: document.getElementById('eventName').value,
+                date: document.getElementById('eventDateTime').value,
+                location: document.getElementById('eventLocation').value,
+                link: document.getElementById('eventLink').value  //optional
+            };
 
-            // Create a card element
-            const card = document.createElement('div');
-            card.classList.add('event-card');
-
-            // Add content to the card
-            card.innerHTML = `
-                <h3>${eventName}</h3>
-                <p>Date: ${new Date(eventDate).toLocaleString()}</p>
-                <p>Location: ${eventLocation}</p>
-                ${eventLink ? `<p><a href="${eventLink}" target="_blank">Event Link</a></p>` : ''}
-                <button class="delete-button">Delete</button> <!-- Add Delete Button -->
-            `;
-
-            // Append the card to the events container
-            document.getElementById('events-container').appendChild(card);
-
-            // Add event listener to the delete button
-            card.querySelector('.delete-button').addEventListener('click', function() {
-                card.remove(); // Remove the card from the DOM
+            fetch('/api/events', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newEvent)
+            })
+            .then(response => response.json())
+            .then(() => {
+                fetchEvents(); // Refresh events list
             });
 
-    // Clear the form fields
-    document.getElementById('event-form').reset();
-});
-
+            this.reset(); // Clear form inputs
+        });
 
         // Initial load of events
         fetchEvents();
