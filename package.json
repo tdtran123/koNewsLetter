@@ -1,20 +1,12 @@
 {
-  "name": "event-cards-backend",
+  "name": "event-cards-json-storage",
   "version": "1.0.0",
-  "description": "A simple backend to store and display event cards.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^7.0.3",
-    "cors": "^2.8.5",
-    "body-parser": "^1.19.1"
-  },
-  "engines": {
-    "node": ">=14.0.0"
-  },
-  "author": "Your Name",
-  "license": "ISC"
+    "express": "^4.17.1",
+    "body-parser": "^1.19.0"
+  }
 }

@@ -1,26 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Event Cards</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Cards</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h1>Event Cards</h1>
-  
-  <!-- Event Form -->
-  <form id="event-form">
-    <input type="text" id="name" placeholder="Event Name" required>
-    <input type="datetime-local" id="date" required>
-    <input type="text" id="location" placeholder="Location" required>
-    <input type="url" id="url" placeholder="Event Link" required>
-    <button type="submit">Add Event</button>
-  </form>
-  
-  <!-- Event Cards -->
-  <div id="event-cards"></div>
-  
-  <script src="script.js"></script>
+    <h1>Event Cards</h1>
+
+    <form id="event-form">
+        <input type="text" id="eventName" placeholder="Event Name" required />
+        <input type="datetime-local" id="eventDateTime" required />
+        <input type="text" id="eventLocation" placeholder="Location" required />
+        <input type="url" id="eventLink" placeholder="Event Link" required />
+        <button type="submit">Add Event</button>
+    </form>
+
+    <div id="events-container"></div>
+
+    <script>
+        // Fetch all events from the server
+        const fetchEvents = () => {
+            fetch('/api/events')
+                .then(response => response.json())
+                .then(events => {
+                    const eventsContainer = document.getElementById('events-container');
+                    eventsContainer.innerHTML = '';
+                    events.forEach(event => {
+                        const eventCard = `
+                            <div class="event-card">
+                                <h3>${event.name}</h3>
+                                <p>Date: ${new Date(event.date).toLocaleString()}</p>
+                                <p>Location: ${event.location}</p>
+                                <a href="${event.link}" target="_blank">Event Link</a>
+                            </div>
+                        `;
+                        eventsContainer.innerHTML += eventCard;
+                    });
+                });
+        };
+
+        // Add new event
+        document.getElementById('event-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const eventName = document.getElementById('eventName').value;
+            const eventDateTime = document.getElementById('eventDateTime').value;
+            const eventLocation = document.getElementById('eventLocation').value;
+            const eventLink = document.getElementById('eventLink').value;
+
+            const newEvent = {
+                name: eventName,
+                date: eventDateTime,
+                location: eventLocation,
+                link: eventLink
+            };
+
+            fetch('/api/events', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(newEvent)
+            })
+            .then(response => response.json())
+            .then(() => {
+                fetchEvents(); // Refresh events list
+            });
+
+            // Clear form inputs
+            this.reset();
+        });
+
+        // Initial load of events
+        fetchEvents();
+    </script>
 </body>
 </html>

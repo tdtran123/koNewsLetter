@@ -1,55 +1,47 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+const fs = require('fs');
+const path = require('path');
 const bodyParser = require('body-parser');
-const path = require('path'); // Add this to serve static files
-
-// Initialize the app
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const eventsFilePath = path.join(__dirname, 'events.json');
+
 // Middleware
-app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public')); // Serve the 'public' directory
+app.use(express.static('public'));
 
-// MongoDB connection
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-})
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.log(err));
+// Helper function to read events from JSON file
+function readEvents() {
+  try {
+    const data = fs.readFileSync(eventsFilePath, 'utf8');
+    return JSON.parse(data);
+  } catch (err) {
+    return [];
+  }
+}
 
-// Event Schema
-const eventSchema = new mongoose.Schema({
-  name: String,
-  date: String,
-  location: String,
-  url: String,
-});
+// Helper function to write events to JSON file
+function writeEvents(events) {
+  fs.writeFileSync(eventsFilePath, JSON.stringify(events, null, 2));
+}
 
-const Event = mongoose.model('Event', eventSchema);
-
-// Routes
-app.get('/api/events', async (req, res) => {
-  const events = await Event.find();
+// API: Get all events
+app.get('/api/events', (req, res) => {
+  const events = readEvents();
   res.json(events);
 });
 
-app.post('/api/events', async (req, res) => {
-  const { name, date, location, url } = req.body;
-  const newEvent = new Event({ name, date, location, url });
-  await newEvent.save();
+// API: Add a new event
+app.post('/api/events', (req, res) => {
+  const newEvent = req.body;
+  const events = readEvents();
+  events.push(newEvent);
+  writeEvents(events);
   res.json(newEvent);
-});
-
-// Serve the HTML file
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 // Start the server
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
