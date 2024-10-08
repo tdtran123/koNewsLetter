@@ -13,7 +13,7 @@
         <input type="text" id="eventName" placeholder="Event Name" required />
         <input type="datetime-local" id="eventDateTime" required />
         <input type="text" id="eventLocation" placeholder="Location" required />
-        <input type="url" id="eventLink" placeholder="Event Link (Optional)" required />
+        <input type="url" id="eventLink" placeholder="Event Link (Optional)" />
         <button type="submit">Add Event</button>
     </form>
 
@@ -32,7 +32,7 @@
                             <h3>${event.name}</h3>
                             <p class="event-date">${new Date(event.date).toLocaleString()}</p>
                             <p class="event-location">${event.location}</p>
-                            <a href="${event.link}" target="_blank">View Event</a>
+                            ${event.link ? `<p><a href="${event.link}" target="_blank">Event Link</a></p>` : ''}
                         </div>
                         `;
                         eventsContainer.innerHTML += eventCard;
