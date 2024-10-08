@@ -28,12 +28,12 @@
                     eventsContainer.innerHTML = '';
                     events.forEach(event => {
                         const eventCard = `
-                            <div class="event-card">
-                                <h3>${event.name}</h3>
-                                <p>Date: ${new Date(event.date).toLocaleString()}</p>
-                                <p>Location: ${event.location}</p>
-                                <a href="${event.link}" target="_blank">Event Link</a>
-                            </div>
+                        <div class="event-card">
+                            <h3>${event.name}</h3>
+                            <p class="event-date">${new Date(event.date).toLocaleString()}</p>
+                            <p class="event-location">${event.location}</p>
+                            <a href="${event.link}" target="_blank">View Event</a>
+                        </div>
                         `;
                         eventsContainer.innerHTML += eventCard;
                     });
