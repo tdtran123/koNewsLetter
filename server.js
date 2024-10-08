@@ -42,6 +42,24 @@ app.post('/api/events', (req, res) => {
   res.json(newEvent);
 });
 
+// API: Delete an event
+app.delete('/api/events/:id', (req, res) => {
+  const eventId = req.params.id; // Get the event ID from the URL
+  let events = readEvents(); // Read current events
+
+  // Find the index of the event with the given ID
+  const eventIndex = events.findIndex(event => event.id === eventId);
+
+  if (eventIndex !== -1) {
+    // Remove the event from the array
+    events.splice(eventIndex, 1);
+    writeEvents(events); // Write the updated events back to the file
+    res.status(204).send(); // Send a 204 No Content response
+  } else {
+    res.status(404).json({ error: 'Event not found' }); // Handle the case where the event is not found
+  }
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
