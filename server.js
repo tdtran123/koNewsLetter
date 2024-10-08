@@ -35,7 +35,7 @@ app.get('/api/events', (req, res) => {
 
 // API: Add a new event
 app.post('/api/events', (req, res) => {
-  const newEvent = req.body;
+  const newEvent = { ...req.body, id: Date.now().toString() }; // Add a unique ID based on timestamp
   const events = readEvents();
   events.push(newEvent);
   writeEvents(events);
