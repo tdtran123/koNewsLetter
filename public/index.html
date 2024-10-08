@@ -33,11 +33,28 @@
                             <p class="event-date">${new Date(event.date).toLocaleString()}</p>
                             <p class="event-location">${event.location}</p>
                             ${event.link ? `<p><a href="${event.link}" target="_blank">Event Link</a></p>` : ''}
+                            <button class="delete-button" data-id="${event.id}">Delete</button> <!-- Delete Button -->
                         </div>
                         `;
                         eventsContainer.innerHTML += eventCard;
                     });
+                    
+                    // Add event listeners for delete buttons
+                    document.querySelectorAll('.delete-button').forEach(button => {
+                        button.addEventListener('click', function() {
+                            deleteEvent(this.getAttribute('data-id'));
+                        });
+                    });
                 });
+        };
+
+        const deleteEvent = (eventId) => {
+            fetch(`/api/events/${eventId}`, {
+                method: 'DELETE'
+            })
+            .then(() => {
+                fetchEvents(); // Refresh events list after deletion
+            });
         };
 
         document.getElementById('event-form').addEventListener('submit', function (e) {
@@ -47,7 +64,7 @@
                 name: document.getElementById('eventName').value,
                 date: document.getElementById('eventDateTime').value,
                 location: document.getElementById('eventLocation').value,
-                link: document.getElementById('eventLink').value  //optional
+                link: document.getElementById('eventLink').value  // Optional
             };
 
             fetch('/api/events', {
