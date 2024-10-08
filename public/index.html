@@ -11,9 +11,12 @@
 
     <form id="event-form">
         <input type="text" id="eventName" placeholder="Event Name" required />
-        <label for="eventDateTime">Date/Time:</label>
-        <input type="datetime-local" id="eventDateTime" required />
-        <input type="datetime-local" id="eventEndDateTime" placeholder="End Date & Time (Optional)" />
+        
+        <div class="date-time-inputs">
+            <input type="datetime-local" id="eventDateTime" required placeholder="Start Time" class="date-input" />
+            <input type="datetime-local" id="eventEndDateTime" placeholder="End Time (Optional)" class="date-input" />
+        </div>
+
         <input type="text" id="eventLocation" placeholder="Location" required />
         <input type="url" id="eventLink" placeholder="Event Link (Optional)" />
         <button type="submit">Add Event</button>

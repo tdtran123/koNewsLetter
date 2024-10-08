@@ -26,6 +26,16 @@ input, button {
   border: 1px solid #ccc;
 }
 
+.date-time-inputs {
+  display: flex;
+  gap: 10px; /* Space between start and end time inputs */
+}
+
+.date-input {
+  flex: 1; /* Make both date inputs the same size as other inputs */
+  min-width: 0; /* Allow the input to shrink */
+}
+
 button {
   background-color: #007BFF;
   color: white;
@@ -92,11 +102,6 @@ button:hover {
   width: 100%; /* Make sure it uses the full width */
 }
 
-.event-date,
-.event-end-date {
-  margin-right: 10px; /* Space between start and end date */
-}
-
 .event-location {
   font-style: italic;
   color: #888;
@@ -108,4 +113,9 @@ button:hover {
   border: none; /* No border */
   padding: 5px 10px; /* Padding */
   cursor: pointer; /* Pointer cursor on hover */
-  margin-top: 
+  margin-top: 10px; /* Space above the button */
+}
+
+.delete-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
