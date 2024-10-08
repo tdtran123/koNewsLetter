@@ -51,7 +51,7 @@ button:hover {
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   width: 300px;
-  text-align: center;
+  text-align: center; /* Center text inside the event card */
   transition: transform 0.2s;
 }
 
@@ -87,8 +87,9 @@ button:hover {
 
 .event-dates {
   display: flex;
-  justify-content: space-between;
+  justify-content: center; /* Center align the date text */
   margin: 5px 0;
+  width: 100%; /* Make sure it uses the full width */
 }
 
 .event-date,
@@ -107,9 +108,4 @@ button:hover {
   border: none; /* No border */
   padding: 5px 10px; /* Padding */
   cursor: pointer; /* Pointer cursor on hover */
-  margin-top: 10px; /* Space above the button */
-}
-
-.delete-button:hover {
-  background-color: #d32f2f; /* Darker red on hover */
-}
+  margin-top: 

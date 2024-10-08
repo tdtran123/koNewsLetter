@@ -29,9 +29,16 @@
                     const eventsContainer = document.getElementById('events-container');
                     eventsContainer.innerHTML = '';
                     events.forEach(event => {
-                        // Format start date
+                        // Format start date without a comma between the year and hour
                         const startDate = new Date(event.date);
-                        const startDateTime = startDate.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true });
+                        const startDateTime = startDate.toLocaleString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric',
+                            hour: 'numeric',
+                            minute: 'numeric',
+                            hour12: true
+                        }).replace(',', ''); // Remove the comma
                         
                         // Format end date (if exists)
                         let endDateTime = '';
