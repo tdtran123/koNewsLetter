@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Cards</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <h1>Event Cards</h1>
+  
+  <!-- Event Form -->
+  <form id="event-form">
+    <input type="text" id="name" placeholder="Event Name" required>
+    <input type="datetime-local" id="date" required>
+    <input type="text" id="location" placeholder="Location" required>
+    <input type="url" id="url" placeholder="Event Link" required>
+    <button type="submit">Add Event</button>
+  </form>
+  
+  <!-- Event Cards -->
+  <div id="event-cards"></div>
+  
+  <script src="script.js"></script>
+</body>
+</html>

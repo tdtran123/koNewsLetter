@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    padding: 0;
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  form input {
+    margin: 5px;
+    padding: 8px;
+  }
+  
+  button {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  #event-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .event-card {
+    border: 1px solid #ccc;
+    padding: 20px;
+    width: 200px;
+    border-radius: 8px;
+  }
+  
+  .event-card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .event-card p {
+    margin: 5px 0;
+  }
+  
+  .event-card a {
+    text-decoration: none;
+    color: blue;
+  }
+  
