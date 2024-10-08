@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiURL = 'https://your-app-name.onrender.com/api/events'; // Replace with your Render backend URL
+    const apiURL = 'https://konewsletter.onrender.com/api/events'; // Replace with your Render backend URL
   
     // Fetch and display existing events
     fetch(apiURL)
