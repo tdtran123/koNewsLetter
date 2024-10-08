@@ -11,6 +11,7 @@
 
     <form id="event-form">
         <input type="text" id="eventName" placeholder="Event Name" required />
+        <label for="eventDateTime">Date/Time:</label>
         <input type="datetime-local" id="eventDateTime" required />
         <input type="datetime-local" id="eventEndDateTime" placeholder="End Date & Time (Optional)" />
         <input type="text" id="eventLocation" placeholder="Location" required />
@@ -28,13 +29,21 @@
                     const eventsContainer = document.getElementById('events-container');
                     eventsContainer.innerHTML = '';
                     events.forEach(event => {
+                        // Format start date
+                        const startDate = new Date(event.date);
+                        const startDateTime = startDate.toLocaleString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', hour12: true });
+                        
+                        // Format end date (if exists)
+                        let endDateTime = '';
+                        if (event.endDate) {
+                            const endDate = new Date(event.endDate);
+                            endDateTime = ` to ${endDate.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`;
+                        }
+
                         const eventCard = `
                         <div class="event-card">
                             <h3>${event.name}</h3>
-                            <div class="event-dates">
-                                <p class="event-date">${new Date(event.date).toLocaleString()}</p>
-                                ${event.endDate ? `<p class="event-end-date">Ends: ${new Date(event.endDate).toLocaleString()}</p>` : ''}
-                            </div>
+                            <p class="event-dates">Date/Time: ${startDateTime}${endDateTime}</p>
                             <p class="event-location">${event.location}</p>
                             ${event.link ? `<p><a href="${event.link}" target="_blank">Event Link</a></p>` : ''}
                             <button class="delete-button" data-id="${event.id}">Delete Event</button>
